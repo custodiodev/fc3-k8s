@@ -17,14 +17,22 @@ spec:
       containers:
         - name: goserver
           image: "bacustodio/hello-go:v5.3"
-          livenessProbe:
+          readinessProbe:
             httpGet:
               path: /healthz
               port: 8000
-            periodSeconds: 5
-            failureThreshold: 3
+            periodSeconds: 3
+            failureThreshold: 1
             timeoutSeconds: 1
             successThreshold: 1
+          # livenessProbe:
+          #   httpGet:
+          #     path: /healthz
+          #     port: 8000
+          #   periodSeconds: 5
+          #   failureThreshold: 3
+          #   timeoutSeconds: 1
+          #   successThreshold: 1
           envFrom:
             - configMapRef:
                 name: goserver-env
