@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
+	"log"
 	"net/http"
 	"os"
 	// "time"
@@ -12,7 +14,7 @@ import (
 func main() {
 	// http.HandleFunc("/healthz", Healthz)
 	// http.HandleFunc("/secret", Secret)
-	// http.HandleFunc("/configmap", ConfigMap)
+	http.HandleFunc("/configmap", ConfigMap)
 	http.HandleFunc("/", Hello)
 	http.ListenAndServe(":8000", nil)
 }
@@ -30,13 +32,13 @@ func Hello(w http.ResponseWriter, r *http.Request) {
 // 	fmt.Fprintf(w, "User: %s. Password: %s", user, password)
 // }
 
-// func ConfigMap(w http.ResponseWriter, r *http.Request) {
-// 	data, err := ioutil.ReadFile("/go/myfamily/family.txt")
-// 	if err != nil {
-// 		log.Fatalf("Error reading file: ", err)
-// 	}
-// 	fmt.Fprintf(w, "My Family: %s.", string(data))
-// }
+func ConfigMap(w http.ResponseWriter, r *http.Request) {
+	data, err := ioutil.ReadFile("/go/myfamily/family.txt")
+	if err != nil {
+		log.Fatalf("Error reading file: ", err)
+	}
+	fmt.Fprintf(w, "My Family: %s.", string(data))
+}
 
 // func Healthz(w http.ResponseWriter, r *http.Request) {
 
