@@ -13,7 +13,7 @@ import (
 
 func main() {
 	// http.HandleFunc("/healthz", Healthz)
-	// http.HandleFunc("/secret", Secret)
+	http.HandleFunc("/secret", Secret)
 	http.HandleFunc("/configmap", ConfigMap)
 	http.HandleFunc("/", Hello)
 	http.ListenAndServe(":8000", nil)
@@ -26,11 +26,11 @@ func Hello(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Hello, I'm %s. I'm %s.", name, age)
 }
 
-// func Secret(w http.ResponseWriter, r *http.Request) {
-// 	user := os.Getenv("USER")
-// 	password := os.Getenv("PASSWORD")
-// 	fmt.Fprintf(w, "User: %s. Password: %s", user, password)
-// }
+func Secret(w http.ResponseWriter, r *http.Request) {
+	user := os.Getenv("USER")
+	password := os.Getenv("PASSWORD")
+	fmt.Fprintf(w, "User: %s. Password: %s", user, password)
+}
 
 func ConfigMap(w http.ResponseWriter, r *http.Request) {
 	data, err := ioutil.ReadFile("/go/myfamily/family.txt")
