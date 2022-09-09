@@ -21,10 +21,10 @@ spec:
             # vCPU -> 1000m (milicores) 500m || 0.5
             # Request = Minimo -> Reserva recursos p/ o POD
             requests:
-              cpu: 100m
+              cpu: 30m
               memory: 20Mi
             limits:
-              cpu: 200m
+              cpu: 30m
               memory: 25Mi
           startupProbe:
             httpGet:
