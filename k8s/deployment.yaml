@@ -17,6 +17,15 @@ spec:
       containers:
         - name: goserver
           image: "bacustodio/hello-go:v5.3"
+          resources:
+            # vCPU -> 1000m (milicores) 500m || 0.5
+            # Request = Minimo -> Reserva recursos p/ o POD
+            requests:
+              cpu: 100m
+              memory: 20Mi
+            limits:
+              cpu: 200m
+              memory: 25Mi
           startupProbe:
             httpGet:
               path: /healthz
